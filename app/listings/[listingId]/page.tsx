@@ -13,8 +13,8 @@ const Page = async ({ params }: { params: IParams }) => {
         return <EmptyState />;
     }
 
-    const listing = await getListingById({ listingId: params.listingId });
-    const reservations = await getReservations({ listingId: params.listingId });
+    const listing = await getListingById(params);
+    const reservations = await getReservations(params);
     const currentUser = await getCurrentUser();
 
     if (!listing) {
