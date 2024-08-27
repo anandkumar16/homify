@@ -37,7 +37,7 @@ function RegisterModal() {
         axios.post("/api/register" , data)
         .then(() => {
             RegisterModal.Onclose();
-            console.log( RegisterModal.isOpen);
+            LoginModal.Onopen();
             toast.success('account created successfully');
         })
         .catch((error) =>{
