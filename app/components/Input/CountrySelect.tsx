@@ -1,4 +1,4 @@
-"use client";
+ "use client";
 import useCountries from "@/app/hooks/useCountries";
 import Select from "react-select";
 export type CountrySelectValue  = {
@@ -10,7 +10,7 @@ export type CountrySelectValue  = {
 }
 
 interface CountrySelectProps {
-    value: CountrySelectValue ;
+    value?: CountrySelectValue ;
     onChange: (value: CountrySelectValue) => void;
 }
 
