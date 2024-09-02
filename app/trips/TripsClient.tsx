@@ -6,6 +6,7 @@ import { useCallback, useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 import ListingsCard from "../components/listings/ListingsCard";
+import Container from "../components/Container";
 
 interface TripsClientProps {
     reservations: SafeReservation[];
@@ -33,7 +34,7 @@ const TripsClient:React.FC<TripsClientProps> =({
         });
     },[router]);
     return (
-        <div>
+        <Container>
           <div>
             <Heading
               title="Trips"
@@ -54,7 +55,7 @@ const TripsClient:React.FC<TripsClientProps> =({
               />
             ))}
           </div>
-        </div>
+        </Container>
       );
       
     }

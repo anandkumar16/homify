@@ -8,6 +8,7 @@ import CategoryBox from '../CategoryBox';
 import { FaSkiing } from 'react-icons/fa';
 import { BsSnow } from 'react-icons/bs';
 import { IoDiamond } from 'react-icons/io5';
+import Container from '../Container';
 
 export const categories = [
     {
@@ -100,7 +101,8 @@ const Categories = () => {
     }
   return (
 
-    <div className='pt-4 flex flex-row items-center justify-between overflow-x-auto'>
+   <Container>
+     <div className='pt-4 flex flex-row items-center justify-between overflow-x-auto'>
         {categories.map((item) => (
             <CategoryBox 
             key={item.label} 
@@ -110,6 +112,7 @@ const Categories = () => {
             />
         ))}
     </div>
+   </Container>
   )
 }
 

@@ -6,6 +6,7 @@ import { useCallback, useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 import ListingsCard from "../components/listings/ListingsCard";
+import Container from "../components/Container";
 
 interface PropertiesClientProps {
     listings: safeListing[];
@@ -33,7 +34,8 @@ const PropertiesClient:React.FC<PropertiesClientProps> =({
         });
     },[router]);
     return (
-        <div>
+        <Container>
+       
           <div>
             <Heading
               title="Properties"
@@ -54,7 +56,7 @@ const PropertiesClient:React.FC<PropertiesClientProps> =({
               />
             ))}
           </div>
-        </div>
+        </Container>
       );
       
     }

@@ -1,3 +1,6 @@
+import ClientOnly from "./components/ClientOnly";
+import Container from "./components/Container";
+
 import getCurrentUser from "./actions/getCurrentUser";
 import getListings, { IListingsParams } from "./actions/getListings";
 import Emptystate from "./components/Emptystate";
@@ -11,12 +14,18 @@ interface HomeProps {
 const Home = async({searchParams} : HomeProps) => {
   const listings = await getListings(searchParams);
   const currentUser = await getCurrentUser();
+
   if (listings.length === 0) {
-    return <Emptystate showReset />;
+    return (
+      <ClientOnly>
+        <Emptystate showReset />;
+      </ClientOnly>
+    )
   }
 
   return (
-    <>
+    <ClientOnly>
+      <Container>
       <div
         className="pt-10 px-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-4 gap-8"
       >
@@ -30,11 +39,10 @@ const Home = async({searchParams} : HomeProps) => {
             />
             </div>
         )  
-      })}
-
-           
+      })}          
       </div>
-    </>
+      </Container>
+    </ClientOnly>
   );
 }
 

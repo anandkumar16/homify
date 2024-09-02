@@ -7,6 +7,7 @@ import { SafeReservation , SafeUser} from "../types";
 import Heading from "../components/Heading";
 import ListingsCard from "../components/listings/ListingsCard";
 import { useRouter } from "next/navigation";
+import Container from "../components/Container";
 
 
 interface ReservationClientProps {
@@ -36,7 +37,7 @@ const ReservationClient:React.FC<ReservationClientProps>=({
         })
     } , [router]);
   return (
-    <div>
+    <Container>
         <Heading 
         title="Reservations"
         subtitle="Booking on your properties"
@@ -55,7 +56,7 @@ const ReservationClient:React.FC<ReservationClientProps>=({
             />
         ))}
         </div>
-    </div>
+    </Container>
   )
 }
 

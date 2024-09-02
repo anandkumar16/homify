@@ -1,6 +1,7 @@
 import Heading from "../components/Heading";
 import { safeListing, SafeUser } from "../types"
 import ListingsCard from "../components/listings/ListingsCard";
+import Container from "../components/Container";
 interface FavoritesClientProps {
     listings: safeListing[];
     currentUser: SafeUser | null;
@@ -13,7 +14,7 @@ const FavoritesClient:React.FC<FavoritesClientProps> =({
     currentUser
 }) => {
   return (
-    <div>
+    <Container>
         <Heading
         title="Favorites"
         subtitle="List of places you've favorited"
@@ -29,7 +30,7 @@ const FavoritesClient:React.FC<FavoritesClientProps> =({
            
         ))}
     </div>
-    </div>
+    </Container>
   )
 }
 
