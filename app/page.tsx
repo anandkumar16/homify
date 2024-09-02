@@ -23,16 +23,16 @@ const Home = async({searchParams} : HomeProps) => {
         {listings.map((listing) => {
         return(
             <div>
-              <ListingsCard
+             <ListingsCard
+              key={listing.id} 
               currentUser={currentUser}
-              key={listing.id}
               data={listing}
-              />
+            />
             </div>
         )  
       })}
 
-        
+           
       </div>
     </>
   );

@@ -22,7 +22,7 @@ const Page = async ({ params }: { params: IParams }) => {
     }
 
     return (
-        <div>
+        <div className='mx-10'>
             <ListingClient
             listing={listing}
             currentUser={currentUser}

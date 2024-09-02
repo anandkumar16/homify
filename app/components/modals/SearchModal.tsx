@@ -10,8 +10,10 @@ import CountrySelect, { CountrySelectValue } from '../Input/CountrySelect';
 import qs from 'query-string';
 import { formatISO } from 'date-fns';
 import Heading from '../Heading';
+import Calender from '../Input/Calender';
+import Counter from '../Input/Counter';
 
-enum STEPS{
+enum STEPS {
     LOCATION = 0,
     DATE = 1,
     INFO = 2
@@ -22,124 +24,154 @@ function SearchModal() {
     const params = useSearchParams();
     const searchModal = useSearchModal();
 
-
     const [location, setLocation] = useState<CountrySelectValue>();
-    const [step , setStep]  = useState(STEPS.LOCATION);
+    const [step, setStep] = useState(STEPS.LOCATION);
     const [guestCount, setGuestCount] = useState(1);
     const [roomCount, setRoomCount] = useState(1);
     const [bathroomCount, setBathroomCount] = useState(1);
-    const [dateRange,setDateRange] = useState<Range>({
+    const [dateRange, setDateRange] = useState<Range>({
         startDate: new Date(),
         endDate: new Date(),
         key: 'selection'
     });
 
-    const Map = useMemo(() => dynamic(() => import('../Map'),{
-      ssr: false
+    const Map = useMemo(() => dynamic(() => import('../Map'), {
+        ssr: false
     }), [location]);
 
+    const onBack = useCallback(() => {
+        setStep((value) => value - 1);
+    }, []);
 
-    const onBack = useCallback(()=>{
-      setStep((value) => value - 1);
-    },[]);
+    const onNext = useCallback(() => {
+        setStep((value) => value + 1);
+    }, []);
 
-    const onNext = useCallback(()=>{
-      setStep((value) => value + 1);
-    },[]);
+    const onSubmit = useCallback(async () => {
+        if (step !== STEPS.INFO) {
+            return onNext();
+        }
 
+        let currentQuery = {};
 
-    const onSubmit = useCallback( async ()=>{
-      if(step !== STEPS.INFO){
-        return onNext();
-      }
+        if (params) {
+            currentQuery = qs.parse(params.toString());
+        }
 
-      let currentQuery = {};
+        const updatedQuery: any = {
+            ...currentQuery,
+            locationValue: location?.value,
+            guestCount,
+            roomCount,
+            bathroomCount,
+        };
 
-      if(params){
-        currentQuery = qs.parse(params.toString());
-      }
+        if (dateRange.startDate) {
+            updatedQuery.startDate = formatISO(dateRange.startDate);
+        }
 
-      const updatedQuery:any = {
-        ...currentQuery,
-        locationValue: location?.value,
-        guestCount,
-        roomCount,
-        bathroomCount,      
+        if (dateRange.endDate) {
+            updatedQuery.endDate = formatISO(dateRange.endDate);
+        }
 
-      }
-      if(dateRange.startDate){
-        updatedQuery.startDate = formatISO(dateRange.startDate);
-      }
+        const url = qs.stringifyUrl({
+            url: '/',
+            query: updatedQuery
+        }, { skipNull: true });
 
-      if(dateRange.endDate){
-        updatedQuery.endDate = formatISO(dateRange.endDate);
-      }
+        setStep(STEPS.LOCATION);
+        searchModal.Onclose();
+        router.push(url);
 
-      const url  = qs.stringify({
-        url:'/',
-        query: updatedQuery
-      } ,{skipNull: true});
-    
-      setStep(STEPS.LOCATION);
-      searchModal.Onclose();
-      router.push(url);
+    }, [step, searchModal, location, guestCount, roomCount, bathroomCount, dateRange, params]);
 
-    },[step,searchModal,location,guestCount,roomCount,bathroomCount,dateRange ,onNext,params]);
+    const actionLabel = useMemo(() => {
+        if (step === STEPS.INFO) {
+            return 'Search';
+        }
+        return 'Next';
+    }, [step]);
 
+    const secondaryActionLabel = useMemo(() => {
+        if (step === STEPS.LOCATION) {
+            return undefined;
+        }
+        return 'Back';
+    }, [step]);
 
-    const octionLabel = useMemo(()=>{
-      if(step === STEPS.INFO){
-        return 'Search';
-      }
-      return 'Next';
-    },[step]);
-
-
-    const secondaryActionLabel = useMemo(()=>{
-      if(step === STEPS.LOCATION){
-        return undefined;
-      }
-      return 'Back';
-    },[step]);
-
-
-    const bodyContent = (
-      <div className='flex flex-col gap-8'>
-        <Heading
-        title='Where do you want to go?'
-        subtitle='find the perfect location'
-        />
-
-        <CountrySelect
-        value={location}
-        onChange={(value)=>
-        setLocation(value as CountrySelectValue
-        )}
-        />
-        <hr/>
-        <Map center={location?.latlng}/>
-      </div>
-    )
-
-    if(step === STEPS.DATE){
-     const  bodyContent=(
-        <div>
-          
+    let bodyContent = (
+        <div className='flex flex-col gap-8'>
+            <Heading
+                title='Where do you want to go?'
+                subtitle='Find the perfect location'
+            />
+            <CountrySelect
+                value={location}
+                onChange={(value) =>
+                    setLocation(value as CountrySelectValue)
+                }
+            />
+            <hr />
+            <Map center={location?.latlng} />
         </div>
-      )
+    );
+
+    if (step === STEPS.DATE) {
+        bodyContent = (
+            <div className='flex flex-col gap-8'>
+                <Heading
+                    title='When do you want to go?'
+                    subtitle='Make sure everyone is free'
+                />
+                <Calender
+                    value={dateRange}
+                    onChange={(value) => setDateRange(value.selection)}
+                />
+            </div>
+        );
     }
 
+    if (step === STEPS.INFO) {
+        bodyContent = (
+            <div className='flex flex-col gap-8'>
+                <Heading
+                    title='More information'
+                    subtitle='Find your perfect place'
+                />
+                <Counter
+                    title='Guests'
+                    subtitle='How many guests are coming?'
+                    value={guestCount}
+                    onChange={(value) => setGuestCount(value)}
+                />
+                <Counter
+                    title='Rooms'
+                    subtitle='How many rooms do you need?'
+                    value={roomCount}
+                    onChange={(value) => setRoomCount(value)}
+                />
+                <Counter
+                    title='Bathrooms'
+                    subtitle='How many bathrooms do you need?'
+                    value={bathroomCount}
+                    onChange={(value) => setBathroomCount(value)}
+                />
+            </div>
+        );
+    }
 
-  return (
-    <Modal
-    isopen={searchModal.isOpen}
-    onClose={searchModal.Onclose}
-    onSubmit={searchModal.Onopen}
-    title="Filters"
-    actionlabel="Search"
-    body={bodyContent}
-    />
-  )
+    return (
+        <Modal
+            isopen={searchModal.isOpen}
+            onClose={searchModal.Onclose}
+            onSubmit={onSubmit}
+            title="Filters"
+            actionlabel={actionLabel}
+            secondaryActionLabel={secondaryActionLabel}
+            secondaryAction={step === STEPS.LOCATION ? undefined : onBack}
+            body={bodyContent}
+        />
+    )
 }
 
 export default SearchModal;

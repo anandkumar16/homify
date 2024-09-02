@@ -22,8 +22,8 @@ const FavoritesClient:React.FC<FavoritesClientProps> =({
         {listings.map((listing) => (
            
                 <ListingsCard
-                currentUser={currentUser}
                 key = {listing.id}
+                currentUser={currentUser}
                 data={listing}
                 />
            

@@ -1,6 +1,5 @@
 import EmptyState from '../components/Emptystate';
 import getCurrentUser from '../actions/getCurrentUser';
-import getReservations from '../actions/getReservations';
 import getListings from '../actions/getListings';
 import PropertiesClient from './PropertiesClient';
 
@@ -25,11 +24,12 @@ const PropertiesPage = async () => {
         />;
     }
     return (
+        <div className="mx-10">
         <PropertiesClient
         listings={listings}
         currentUser={currentUser}
-        
         />
+        </div>
     )
     
 };

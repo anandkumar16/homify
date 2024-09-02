@@ -24,11 +24,13 @@ const TripsPage = async () => {
         />;
     }
     return (
+        <div className="mx-10">
         <TripsClient
         reservations={reservations}
         currentUser={currentUser}
-        
         />
+        </div>
+        
     )
     
 };

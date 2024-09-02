@@ -25,10 +25,12 @@ const reservationsPage = async ()=>{
     }
 
     return (
+        <div className="mx-10">
         <ReservationClient
         reservations={reservations}
         currentUser={currentUser}
         />
+        </div>
     )
 }  
 
