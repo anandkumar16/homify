@@ -14,7 +14,7 @@ export const categories = [
     {
         label : 'Beach',
         icon: TbBeach,
-        description :'property new the beach'
+        description :'property near the beach'
 
     },
     {
@@ -30,12 +30,12 @@ export const categories = [
     {
         label:'Countryside',
         icon: TbMountain,
-        description:'property nearn countryside'
+        description:'property near countryside'
     },
     {
         label:'Pools',
         icon: TbPool,
-        description:'property with pools'
+        description:'property with pool'
     },
     {
         label:'Islands',
@@ -66,7 +66,7 @@ export const categories = [
     {
         label:'Arctic',
         icon: BsSnow,
-        description:'property is in a castle'
+        description:'property is in a snow area'
     },
     {
         label:'Cave',
@@ -86,7 +86,7 @@ export const categories = [
     {
         label:'Lux',
         icon: IoDiamond,
-        description:'property is  a luxerious'
+        description:'property is luxerious'
     }
 ]
 
