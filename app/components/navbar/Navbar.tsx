@@ -15,10 +15,10 @@ const Navbar: React.FC<NavbarProps> = ({ currentUser }) => {
   const router = useRouter();
   return (
     <Container>
-      <div className="fixed top-0 left-0 right-0 bg-white shadow-sm z-50 px-4 py-4 h-20 flex items-center justify-between border-b-[1px] border-gray-200">
+      <div className="fixed top-0 left-0 right-0 bg-white shadow-sm  px-4 py-4 h-20 flex items-center justify-between border-b-[1px] border-gray-200 z-30">
         <img 
         onClick={() => { router.push('/') }}
-         src="/airbnblogo.webp" 
+         src="/lugo.jpeg" 
          alt="Logo" 
          className="w-40 h-16 cursor-pointer"
           />

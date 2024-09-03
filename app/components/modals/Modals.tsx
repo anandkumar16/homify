@@ -55,8 +55,8 @@ const Modals: React.FC<ModalsProps> = ({
   if (!isopen) return null;
   return (
     <>
-    <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none bg-neutral-800/70">
-    <div className="relative w-full md:w-4/6 lg:w-3/6 xl:w-2/5 my-1 mx-auto h-full lg:h-3/4 md:h-3/4">
+  <div className="fixed inset-0 z-50 flex items-center justify-center overflow-x-hidden overflow-y-auto outline-none focus:outline-none bg-neutral-800/70">
+  <div className="relative w-full md:w-4/6 lg:w-3/6 xl:w-2/5 my-6 mx-auto max-h-[90vh]">
       <div
         className={`
             translate

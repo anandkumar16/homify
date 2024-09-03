@@ -38,7 +38,7 @@ const Usermenu: React.FC<UsermenuProps> = ({ currentUser }) => {
       <div className="flex flex-row items-center gap-3">
         <div
           onClick={onRent}
-          className="text-sm font-semibold py-3 px-4 rounded-full transition cursor-pointer"
+          className=" hidden md:block text-sm font-semibold py-3 px-4 rounded-full transition cursor-pointer"
         >
           Airbnb your home
         </div>
@@ -53,7 +53,7 @@ const Usermenu: React.FC<UsermenuProps> = ({ currentUser }) => {
         </div>
       </div>
       {isOpen && (
-        <div className="absolute text-sm top-14 right-0 w-[15vw] bg-white rounded-lg shadow-md z-50">
+        <div className="absolute text-sm top-14 right-0 w-[50vw] sm:w-[40vw] md:w-[15vw] bg-white rounded-lg shadow-md z-50">
           <div className="flex flex-col cursor-pointer">
             {currentUser ? (
               <>
