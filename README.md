@@ -1,4 +1,4 @@
-# My Air
+# Homify
 
 ## Getting Started
 
