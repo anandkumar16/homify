@@ -29,7 +29,7 @@ const Home = async({searchParams} : HomeProps) => {
     <ClientOnly>
       <Container>
       <div
-        className="pt-10 px-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-4 gap-8"
+        className="pt-10  px-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-4 gap-8"
       >
         {listings.map((listing) => {
         return(
